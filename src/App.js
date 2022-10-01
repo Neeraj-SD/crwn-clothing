@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 import Header from './components/header/header.component';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
@@ -10,15 +10,6 @@ import Shop from './pages/shop/shop.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 
 class App extends React.Component {
-
-  constructor() {
-    super()
-
-    this.state = {
-      currentUser: null
-    }
-
-  }
 
   unsubscribeFromAuth = null
 
@@ -49,13 +40,20 @@ class App extends React.Component {
   }
 
   render() {
+    console.log(this.props)
+
+    // console.log('currentUser' + this.props.currentUser && this.props.currentUser.currentUser)
+
     return (
       <div className="App">
         <Header />
         <Routes>
           <Route exact path='/' element={<HomePage />} />
           <Route path='/shop' element={<Shop />} />
-          <Route path='/signin' element={<SignInAndSignUpPage />} />
+          <Route path='/signin'
+            element={this.props.currentUser?.currentUser ? <Navigate to="/" /> : < SignInAndSignUpPage />}
+          // render={() => (<h1>Hello</h1>)}
+          />
         </Routes>
         {/* <HomePage /> */}
       </div >
@@ -65,8 +63,12 @@ class App extends React.Component {
 
 }
 
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser
+})
+
 const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
 })
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
