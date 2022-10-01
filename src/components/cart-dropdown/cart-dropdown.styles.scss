@@ -15,7 +15,9 @@
       height: 300px;
       display: flex;
       flex-direction: column;
-      // overflow: scroll;
+      overflow: scroll;
+      overflow-x: hidden;
+      scrollbar-width: none;
     }
   
     button {
