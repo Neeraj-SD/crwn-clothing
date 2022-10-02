@@ -8,6 +8,7 @@ import { setCurrentUser } from '../src/redux/user/user.actions'
 import HomePage from './pages/homepage/homepage.component';
 import Shop from './pages/shop/shop.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
+import CheckoutPage from './pages/checkout/checkout.component'
 
 class App extends React.Component {
 
@@ -50,6 +51,7 @@ class App extends React.Component {
         <Routes>
           <Route exact path='/' element={<HomePage />} />
           <Route path='/shop' element={<Shop />} />
+          <Route path='/checkout' element={<CheckoutPage />} />
           <Route path='/signin'
             element={this.props.currentUser?.currentUser ? <Navigate to="/" /> : < SignInAndSignUpPage />}
           // render={() => (<h1>Hello</h1>)}
