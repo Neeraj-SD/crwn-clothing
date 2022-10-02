@@ -4,7 +4,7 @@ const selectDirectory = state => state.directory
 
 const selectDirectorySections = createSelector(
     [selectDirectory],
-    directory => directory.collections
+    directory => directory.sections
 )
 
 export default selectDirectorySections
