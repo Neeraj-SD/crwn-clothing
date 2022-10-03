@@ -9,6 +9,7 @@ import HomePage from './pages/homepage/homepage.component';
 import Shop from './pages/shop/shop.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import CheckoutPage from './pages/checkout/checkout.component'
+import CollectionPage from './pages/collection/collection.component';
 
 class App extends React.Component {
 
@@ -50,7 +51,10 @@ class App extends React.Component {
         <Header />
         <Routes>
           <Route exact path='/' element={<HomePage />} />
-          <Route path='/shop' element={<Shop />} />
+          <Route path='/shop'>
+            <Route index element={<Shop />} />
+            <Route path=':collectionId' element={<CollectionPage />} />
+          </Route>
           <Route path='/checkout' element={<CheckoutPage />} />
           <Route path='/signin'
             element={this.props.currentUser?.currentUser ? <Navigate to="/" /> : < SignInAndSignUpPage />}
